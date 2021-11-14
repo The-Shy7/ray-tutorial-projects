@@ -7,15 +7,20 @@ app = FastAPI()
 ray.init(address="auto", namespace="summarizer")
 serve.start(detached=True)
 
-@serve.deployment(route_prefix="/hello")
-@serve.ingress(app)
-class MyFastAPIDeployment:
-    @app.get("/")
-    def root(self):
-        return "Hello, world!"
-    
-    @app.post("/{subpath}")
-    def root(self, subpath: str):
-        return f"Hello from {subpath}!"
+@app.get("/")
+def f():
+    return "Hello from the root!"
 
-MyFastAPIDeployment.deploy()
+@serve.deployment(route_prefix="/api1")
+@serve.ingress(app)
+class FastAPIWrapper1:
+    @app.get("/subpath")
+    def method(self):
+        return "Hello 1!"
+
+@serve.deployment(route_prefix="/api2")
+@serve.ingress(app)
+class FastAPIWrapper2:
+    @app.get("/subpath")
+    def method(self):
+        return "Hello 2!"

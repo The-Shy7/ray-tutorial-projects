@@ -20,7 +20,7 @@ app = FastAPI()
 # exposes three HTTP routes
 # serve class behind HTTP endpoint using ray serve
 @serve.deployment # made this class into Deployment 
-@serve.ingress(app)
+@serve.ingress(app) # define serve deployment that wraps FastAPI app
 class Counter:
   def __init__(self):
       self.count = 0

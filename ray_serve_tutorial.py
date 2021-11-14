@@ -12,7 +12,7 @@ ray.init()
 # when python script exits, ray serve shuts down
 # if want to keep ray serve running in background, 
 # can use serve.start(detached=True)
-serve.start(detached=True)
+serve.start()
 
 app = FastAPI()
 

@@ -24,3 +24,6 @@ class FastAPIWrapper2:
     @app.get("/subpath")
     def method(self):
         return "Hello 2!"
+    
+FastAPIWrapper1.deploy()
+FastAPIWrapper2.deploy()

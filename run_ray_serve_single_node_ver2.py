@@ -9,10 +9,12 @@ import ray
 from ray import serve
 
 # connect to the running ray cluster
-ray.init(address="auto", namespace="serve")
+ray.init("anyscale://raj-test")
+serve.start(detached=True)
 
 @serve.deployment
-def my_func(request):
-  return "hello"
+def diff_func(request):
+  return "something different"
 
-my_func.deploy()
+diff_func.deploy()
+print(serve.list_deployments())
